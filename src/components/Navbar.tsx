@@ -11,8 +11,61 @@ import {
   CircleDot,
   Code2,
   Play,
+  LogIn,
 } from 'lucide-react';
-import { user } from '../data/mockData';
+
+// SVG иконка дракона
+export function DragonIcon({ size = 32, className = '' }: { size?: number; className?: string }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 64 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <path
+        d="M52 18c-2-4-6-6-10-6-1 0-2 0-3 1-2-3-5-5-9-5-3 0-6 1-8 4-1-1-3-1-4-1-4 0-7 2-9 6-2 4-2 9 0 13 1 2 2 3 4 4-1 3 0 6 2 8 2 2 5 3 8 2 1 2 3 4 5 5 3 1 6 1 8-1 2 1 4 1 6 0 3-1 5-4 5-7 0-1 0-2-1-3 3-1 5-4 5-7 0-2-1-4-2-5 2-2 3-5 1-8z"
+        fill="currentColor"
+      />
+      <path
+        d="M20 22c-1 0-2 1-2 2s1 2 2 2 2-1 2-2-1-2-2-2z"
+        fill="#000"
+      />
+      <path
+        d="M42 22c-1 0-2 1-2 2s1 2 2 2 2-1 2-2-1-2-2-2z"
+        fill="#000"
+      />
+      <path
+        d="M28 32c2 2 6 2 8 0"
+        stroke="#000"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M14 14c-2-2-4-2-6-1 2 1 3 3 3 5 1-2 2-3 3-4z"
+        fill="currentColor"
+        opacity="0.8"
+      />
+      <path
+        d="M50 14c2-2 4-2 6-1-2 1-3 3-3 5-1-2-2-3-3-4z"
+        fill="currentColor"
+        opacity="0.8"
+      />
+      <path
+        d="M24 10c-1-2-3-3-5-2 2 0 3 2 3 4 1-1 1-1 2-2z"
+        fill="currentColor"
+        opacity="0.6"
+      />
+      <path
+        d="M40 10c1-2 3-3 5-2-2 0-3 2-3 4-1-1-1-1-2-2z"
+        fill="currentColor"
+        opacity="0.6"
+      />
+    </svg>
+  );
+}
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -20,32 +73,30 @@ export default function Navbar() {
   const [createMenuOpen, setCreateMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-[#24292f] text-white sticky top-0 z-50">
+    <nav className="bg-black text-white sticky top-0 z-50 border-b border-red-900/40">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Left section */}
+          {/* Левая часть */}
           <div className="flex items-center gap-4">
             <button
-              className="lg:hidden text-white hover:text-gray-300"
+              className="lg:hidden text-white hover:text-red-400"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
 
-            <Link to="/" className="flex items-center text-white hover:text-gray-300 transition-colors">
-              <svg height="32" viewBox="0 0 16 16" width="32" fill="currentColor">
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
-              </svg>
+            <Link to="/" className="flex items-center text-red-500 hover:text-red-400 transition-colors">
+              <DragonIcon size={32} />
             </Link>
 
-            {/* Search */}
+            {/* Поиск */}
             <div className="hidden md:flex items-center relative">
-              <div className={`flex items-center bg-[#3d444d] border rounded-md px-3 py-1.5 w-[300px] transition-all ${searchFocused ? 'border-blue-500 bg-[#0d1117] w-[400px]' : 'border-[#3d444d] hover:border-gray-500'}`}>
-                <Search size={14} className="text-gray-400 mr-2" />
+              <div className={`flex items-center bg-neutral-900 border rounded-md px-3 py-1.5 w-[300px] transition-all ${searchFocused ? 'border-red-500 bg-neutral-950 w-[400px]' : 'border-neutral-700 hover:border-red-700'}`}>
+                <Search size={14} className="text-neutral-500 mr-2" />
                 <input
                   type="text"
-                  placeholder="Type / to search"
-                  className="bg-transparent text-sm text-white placeholder-gray-400 outline-none w-full"
+                  placeholder="Поиск репозиториев..."
+                  className="bg-transparent text-sm text-white placeholder-neutral-500 outline-none w-full"
                   onFocus={() => setSearchFocused(true)}
                   onBlur={() => setSearchFocused(false)}
                 />
@@ -53,91 +104,81 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Center nav - hidden on mobile */}
+          {/* Центральная навигация */}
           <div className="hidden lg:flex items-center gap-4 text-sm font-medium">
-            <Link to="/" className="text-white hover:text-gray-300 transition-colors">
-              Pull requests
+            <Link to="/" className="text-neutral-300 hover:text-red-400 transition-colors">
+              Пул-реквесты
             </Link>
-            <Link to="/" className="text-white hover:text-gray-300 transition-colors">
-              Issues
+            <Link to="/" className="text-neutral-300 hover:text-red-400 transition-colors">
+              Задачи
             </Link>
-            <Link to="/" className="text-white hover:text-gray-300 transition-colors">
-              Codespaces
+            <Link to="/" className="text-neutral-300 hover:text-red-400 transition-colors">
+              Маркетплейс
             </Link>
-            <Link to="/" className="text-white hover:text-gray-300 transition-colors">
-              Marketplace
-            </Link>
-            <Link to="/" className="text-white hover:text-gray-300 transition-colors">
-              Explore
+            <Link to="/" className="text-neutral-300 hover:text-red-400 transition-colors">
+              Обзор
             </Link>
           </div>
 
-          {/* Right section */}
+          {/* Правая часть */}
           <div className="flex items-center gap-3">
-            {/* Notifications */}
-            <button className="relative text-white hover:text-gray-300 transition-colors">
+            {/* Уведомления */}
+            <button className="relative text-neutral-400 hover:text-red-400 transition-colors">
               <Bell size={20} />
-              <span className="absolute -top-1 -right-1 bg-blue-500 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">
-                3
-              </span>
             </button>
 
-            {/* Create new */}
+            {/* Создать */}
             <div className="relative">
               <button
-                className="flex items-center text-white hover:text-gray-300 transition-colors text-sm"
+                className="flex items-center text-neutral-300 hover:text-red-400 transition-colors text-sm"
                 onClick={() => setCreateMenuOpen(!createMenuOpen)}
               >
                 <Plus size={16} className="mr-1" />
                 <ChevronDown size={12} />
               </button>
               {createMenuOpen && (
-                <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
-                  <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2">
-                    <Code2 size={14} /> New repository
+                <div className="absolute right-0 top-full mt-2 w-56 bg-neutral-900 rounded-lg shadow-lg border border-red-900/40 py-2 z-50">
+                  <button className="w-full text-left px-4 py-2 text-sm text-neutral-300 hover:bg-neutral-800 hover:text-red-400 flex items-center gap-2">
+                    <Code2 size={14} /> Новый репозиторий
                   </button>
-                  <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2">
-                    <GitPullRequest size={14} /> New pull request
+                  <button className="w-full text-left px-4 py-2 text-sm text-neutral-300 hover:bg-neutral-800 hover:text-red-400 flex items-center gap-2">
+                    <GitPullRequest size={14} /> Новый пул-реквест
                   </button>
-                  <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2">
-                    <CircleDot size={14} /> New issue
+                  <button className="w-full text-left px-4 py-2 text-sm text-neutral-300 hover:bg-neutral-800 hover:text-red-400 flex items-center gap-2">
+                    <CircleDot size={14} /> Новая задача
                   </button>
-                  <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2">
-                    <Play size={14} /> New codespace
+                  <button className="w-full text-left px-4 py-2 text-sm text-neutral-300 hover:bg-neutral-800 hover:text-red-400 flex items-center gap-2">
+                    <Play size={14} /> Новое окружение
                   </button>
                 </div>
               )}
             </div>
 
-            {/* Profile */}
-            <Link to={`/${user.username}`} className="flex items-center gap-1">
-              <img
-                src={user.avatar}
-                alt={user.username}
-                className="w-8 h-8 rounded-full border border-gray-600 hover:border-gray-400 transition-colors"
-              />
-              <ChevronDown size={12} className="text-white" />
-            </Link>
+            {/* Вход */}
+            <button className="flex items-center gap-2 border border-red-700 rounded-md px-3 py-1.5 text-sm font-medium text-red-400 hover:bg-red-950 hover:text-red-300 transition-colors">
+              <LogIn size={14} />
+              <span className="hidden sm:inline">Войти</span>
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Мобильное меню */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-gray-700 px-4 py-4 space-y-3">
-          <div className="flex items-center bg-[#3d444d] border border-[#3d444d] rounded-md px-3 py-2">
-            <Search size={14} className="text-gray-400 mr-2" />
+        <div className="lg:hidden border-t border-red-900/40 px-4 py-4 space-y-3 bg-black">
+          <div className="flex items-center bg-neutral-900 border border-neutral-700 rounded-md px-3 py-2">
+            <Search size={14} className="text-neutral-500 mr-2" />
             <input
               type="text"
-              placeholder="Search GitHub"
-              className="bg-transparent text-sm text-white placeholder-gray-400 outline-none w-full"
+              placeholder="Поиск..."
+              className="bg-transparent text-sm text-white placeholder-neutral-500 outline-none w-full"
             />
           </div>
           <div className="space-y-2 text-sm">
-            <Link to="/" className="block text-white hover:text-gray-300 py-1">Pull requests</Link>
-            <Link to="/" className="block text-white hover:text-gray-300 py-1">Issues</Link>
-            <Link to="/" className="block text-white hover:text-gray-300 py-1">Marketplace</Link>
-            <Link to="/" className="block text-white hover:text-gray-300 py-1">Explore</Link>
+            <Link to="/" className="block text-neutral-300 hover:text-red-400 py-1">Пул-реквесты</Link>
+            <Link to="/" className="block text-neutral-300 hover:text-red-400 py-1">Задачи</Link>
+            <Link to="/" className="block text-neutral-300 hover:text-red-400 py-1">Маркетплейс</Link>
+            <Link to="/" className="block text-neutral-300 hover:text-red-400 py-1">Обзор</Link>
           </div>
         </div>
       )}
