@@ -1,15 +1,62 @@
 import { Link } from 'react-router-dom';
 import {
-  BookOpen,
-  TrendingUp,
-  GitFork,
-  Star,
   Code2,
   Shield,
-  Zap,
   Users,
-  Globe,
 } from 'lucide-react';
+
+// SVG иконка дракона
+function DragonIcon({ size = 32, className = '' }: { size?: number; className?: string }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 64 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <path
+        d="M52 18c-2-4-6-6-10-6-1 0-2 0-3 1-2-3-5-5-9-5-3 0-6 1-8 4-1-1-3-1-4-1-4 0-7 2-9 6-2 4-2 9 0 13 1 2 2 3 4 4-1 3 0 6 2 8 2 2 5 3 8 2 1 2 3 4 5 5 3 1 6 1 8-1 2 1 4 1 6 0 3-1 5-4 5-7 0-1 0-2-1-3 3-1 5-4 5-7 0-2-1-4-2-5 2-2 3-5 1-8z"
+        fill="currentColor"
+      />
+      <path
+        d="M20 22c-1 0-2 1-2 2s1 2 2 2 2-1 2-2-1-2-2-2z"
+        fill="#000"
+      />
+      <path
+        d="M42 22c-1 0-2 1-2 2s1 2 2 2 2-1 2-2-1-2-2-2z"
+        fill="#000"
+      />
+      <path
+        d="M28 32c2 2 6 2 8 0"
+        stroke="#000"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M14 14c-2-2-4-2-6-1 2 1 3 3 3 5 1-2 2-3 3-4z"
+        fill="currentColor"
+        opacity="0.8"
+      />
+      <path
+        d="M50 14c2-2 4-2 6-1-2 1-3 3-3 5-1-2-2-3-3-4z"
+        fill="currentColor"
+        opacity="0.8"
+      />
+      <path
+        d="M24 10c-1-2-3-3-5-2 2 0 3 2 3 4 1-1 1-1 2-2z"
+        fill="currentColor"
+        opacity="0.6"
+      />
+      <path
+        d="M40 10c1-2 3-3 5-2-2 0-3 2-3 4-1-1-1-1-2-2z"
+        fill="currentColor"
+        opacity="0.6"
+      />
+    </svg>
+  );
+}
 
 export default function Dashboard() {
   return (
@@ -19,6 +66,11 @@ export default function Dashboard() {
         <div className="absolute inset-0 bg-gradient-to-b from-red-950/20 via-black to-black" />
         <div className="relative max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
           <div className="text-center max-w-3xl mx-auto">
+            <div className="flex justify-center mb-6">
+              <div className="w-24 h-24 bg-red-950/30 border border-red-900/50 rounded-full flex items-center justify-center text-red-500">
+                <DragonIcon size={64} />
+              </div>
+            </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
               Создавайте <span className="text-red-500">великое</span> вместе
             </h1>
@@ -71,8 +123,8 @@ export default function Dashboard() {
       {/* Пустое состояние */}
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-8 sm:p-12 text-center">
-          <div className="w-16 h-16 bg-red-950/30 rounded-full flex items-center justify-center mx-auto mb-6">
-            <BookOpen size={28} className="text-red-500" />
+          <div className="w-16 h-16 bg-red-950/30 rounded-full flex items-center justify-center mx-auto mb-6 text-red-500">
+            <DragonIcon size={40} />
           </div>
           <h3 className="text-xl font-semibold text-white mb-3">
             У вас пока нет репозиториев
@@ -86,97 +138,6 @@ export default function Dashboard() {
           </button>
         </div>
       </div>
-
-      {/* Популярные репозитории */}
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-        <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-          <TrendingUp size={20} className="text-red-500" />
-          Популярные репозитории
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {[
-            { name: 'torvalds/linux', desc: 'Ядро операционной системы Linux', stars: '172k', lang: 'C', color: '#555555' },
-            { name: 'microsoft/vscode', desc: 'Визуальный редактор кода', stars: '158k', lang: 'TypeScript', color: '#3178c6' },
-            { name: 'facebook/react', desc: 'Библиотека для создания интерфейсов', stars: '223k', lang: 'JavaScript', color: '#f1e05a' },
-            { name: 'tensorflow/tensorflow', desc: 'Фреймворк машинного обучения', stars: '183k', lang: 'C++', color: '#f34b7d' },
-          ].map((repo, i) => (
-            <div key={i} className="bg-neutral-900 border border-neutral-800 rounded-lg p-4 hover:border-red-900/50 transition-colors">
-              <div className="flex items-start justify-between mb-2">
-                <div className="flex items-center gap-2">
-                  <BookOpen size={14} className="text-neutral-500" />
-                  <span className="text-sm font-semibold text-red-400 hover:underline cursor-pointer">
-                    {repo.name}
-                  </span>
-                </div>
-                <button className="flex items-center gap-1 text-xs border border-neutral-700 rounded-md px-2 py-1 text-neutral-400 hover:text-red-400 hover:border-red-700 transition-colors">
-                  <Star size={10} /> В избранное
-                </button>
-              </div>
-              <p className="text-xs text-neutral-500 mb-3">{repo.desc}</p>
-              <div className="flex items-center gap-4 text-xs text-neutral-500">
-                <span className="flex items-center gap-1">
-                  <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: repo.color }} />
-                  {repo.lang}
-                </span>
-                <span className="flex items-center gap-1">
-                  <Star size={10} /> {repo.stars}
-                </span>
-                <span className="flex items-center gap-1">
-                  <GitFork size={10} /> {Math.floor(parseInt(repo.stars) / 4)}k
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Статистика */}
-      <div className="border-t border-neutral-800">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-3xl font-bold text-red-500 mb-1">100M+</div>
-              <div className="text-sm text-neutral-400">Разработчиков</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-red-500 mb-1">420M+</div>
-              <div className="text-sm text-neutral-400">Репозиториев</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-red-500 mb-1">90%</div>
-              <div className="text-sm text-neutral-400">Компаний Fortune 100</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-red-500 mb-1">4M+</div>
-              <div className="text-sm text-neutral-400">Организаций</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Футер */}
-      <footer className="border-t border-neutral-800 bg-black">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2 text-neutral-500 text-sm">
-              <svg height="20" viewBox="0 0 16 16" width="20" fill="currentColor">
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
-              </svg>
-              <span>© 2026 GitHub Clone</span>
-            </div>
-            <div className="flex items-center gap-4 text-sm text-neutral-500">
-              <Link to="/" className="hover:text-red-400 transition-colors">Условия</Link>
-              <Link to="/" className="hover:text-red-400 transition-colors">Конфиденциальность</Link>
-              <Link to="/" className="hover:text-red-400 transition-colors">Безопасность</Link>
-              <Link to="/" className="hover:text-red-400 transition-colors">Статус</Link>
-              <Link to="/" className="hover:text-red-400 transition-colors">Документация</Link>
-              <Link to="/" className="hover:text-red-400 transition-colors flex items-center gap-1">
-                <Globe size={14} /> Русский
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
