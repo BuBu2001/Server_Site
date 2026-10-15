@@ -1,179 +1,182 @@
 import { Link } from 'react-router-dom';
 import {
   BookOpen,
-  Star,
-  GitPullRequest,
-  CircleDot,
-  GitFork,
-  ArrowRight,
   TrendingUp,
+  GitFork,
+  Star,
+  Code2,
+  Shield,
+  Zap,
   Users,
+  Globe,
 } from 'lucide-react';
-import { user, repositories, recentActivity } from '../data/mockData';
 
 export default function Dashboard() {
   return (
-    <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
-      <div className="flex flex-col lg:flex-row gap-8">
-        {/* Left sidebar */}
-        <div className="lg:w-[300px] flex-shrink-0">
-          {/* User card */}
-          <div className="flex items-center gap-3 mb-6">
-            <Link to={`/${user.username}`}>
-              <img src={user.avatar} alt={user.username} className="w-10 h-10 rounded-full" />
-            </Link>
-            <div>
-              <Link to={`/${user.username}`} className="text-sm font-semibold text-gray-900 hover:text-blue-600">
-                {user.username}
-              </Link>
-            </div>
-          </div>
-
-          {/* Recent activity */}
-          <div className="mb-6">
-            <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-              Recent activity
-            </h3>
-            <div className="space-y-3">
-              {recentActivity.slice(0, 5).map((activity, i) => (
-                <div key={i} className="flex items-start gap-3 text-sm">
-                  <div className="mt-0.5">
-                    {activity.type === 'push' && <GitPullRequest size={14} className="text-green-600" />}
-                    {activity.type === 'star' && <Star size={14} className="text-yellow-500" />}
-                    {activity.type === 'fork' && <GitFork size={14} className="text-purple-600" />}
-                    {activity.type === 'issue' && <CircleDot size={14} className="green-600" />}
-                    {activity.type === 'pr' && <GitPullRequest size={14} className="text-green-600" />}
-                  </div>
-                  <div>
-                    <span className="text-gray-700">{activity.message}</span>
-                    <Link to={`/repo/${activity.repo}`} className="text-blue-600 hover:underline ml-1 font-medium">
-                      {activity.repo}
-                    </Link>
-                    <p className="text-xs text-gray-400 mt-0.5">{activity.time}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Explore repos */}
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-              <TrendingUp size={14} />
-              Explore repositories
-            </h3>
-            <div className="space-y-3">
-              {[
-                { name: 'facebook/react', desc: 'A declarative, efficient, and flexible JavaScript library', stars: '215k', lang: 'JavaScript' },
-                { name: 'vercel/next.js', desc: 'The React Framework for the Web', stars: '117k', lang: 'JavaScript' },
-                { name: 'tailwindlabs/tailwindcss', desc: 'A utility-first CSS framework', stars: '77k', lang: 'CSS' },
-              ].map((repo, i) => (
-                <div key={i} className="text-sm">
-                  <Link to="/" className="text-blue-600 hover:underline font-medium">{repo.name}</Link>
-                  <p className="text-xs text-gray-500 mt-0.5">{repo.desc}</p>
-                  <div className="flex items-center gap-3 mt-1 text-xs text-gray-500">
-                    <span className="flex items-center gap-1">
-                      <Star size={10} /> {repo.stars}
-                    </span>
-                    <span>{repo.lang}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Main content */}
-        <div className="flex-1 min-w-0">
-          {/* Feed header */}
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-base font-semibold text-gray-900">Home</h2>
-            <div className="flex items-center gap-2">
-              <button className="text-sm text-gray-600 hover:text-blue-600 flex items-center gap-1">
-                <Users size={14} /> Following
+    <div className="bg-black min-h-screen">
+      {/* Hero секция */}
+      <div className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-red-950/20 via-black to-black" />
+        <div className="relative max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+          <div className="text-center max-w-3xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
+              Создавайте <span className="text-red-500">великое</span> вместе
+            </h1>
+            <p className="text-lg sm:text-xl text-neutral-400 mb-8">
+              Платформа для хостинга кода, совместной работы и управления проектами.
+              Присоединяйтесь к миллионам разработчиков по всему миру.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-semibold px-8 py-3 rounded-md transition-colors text-lg">
+                Начать бесплатно
               </button>
-              <button className="text-sm text-gray-600 hover:text-blue-600 flex items-center gap-1">
-                <TrendingUp size={14} /> For you
+              <button className="w-full sm:w-auto border border-neutral-600 hover:border-red-600 text-neutral-300 hover:text-red-400 font-semibold px-8 py-3 rounded-md transition-colors text-lg">
+                Войти
               </button>
             </div>
-          </div>
-
-          {/* Quick create */}
-          <div className="bg-white border border-gray-200 rounded-lg p-4 mb-6">
-            <div className="flex items-center gap-3 mb-3">
-              <img src={user.avatar} alt={user.username} className="w-8 h-8 rounded-full" />
-              <input
-                type="text"
-                placeholder="Start a new discussion or create an issue..."
-                className="flex-1 border border-gray-300 rounded-md px-3 py-1.5 text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-              />
-            </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 text-xs text-gray-500">
-                <button className="hover:text-blue-600">📎 Attach files</button>
-                <button className="hover:text-blue-600">🏷️ Labels</button>
-              </div>
-              <button className="bg-[#2da44e] text-white text-sm font-medium px-4 py-1.5 rounded-md hover:bg-[#2c974b]">
-                Submit
-              </button>
-            </div>
-          </div>
-
-          {/* Repository feed */}
-          <div className="space-y-4">
-            {repositories.slice(0, 5).map(repo => (
-              <div key={repo.id} className="bg-white border border-gray-200 rounded-lg p-4 hover:border-gray-400 transition-colors">
-                <div className="flex items-start justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <BookOpen size={14} className="text-gray-400" />
-                    <Link to={`/repo/${repo.name}`} className="text-lg font-semibold text-blue-600 hover:underline">
-                      {repo.name}
-                    </Link>
-                    <span className="text-xs border border-gray-300 rounded-full px-2 py-0.5 text-gray-500">
-                      {repo.isPublic ? 'Public' : 'Private'}
-                    </span>
-                  </div>
-                  <button className="flex items-center gap-1 text-xs border border-gray-300 rounded-md px-2 py-1 text-gray-600 hover:bg-gray-50">
-                    <Star size={12} /> Star
-                  </button>
-                </div>
-                <p className="text-sm text-gray-600 mb-3">{repo.description}</p>
-                {repo.topics.length > 0 && (
-                  <div className="flex flex-wrap gap-1 mb-3">
-                    {repo.topics.map(topic => (
-                      <span key={topic} className="bg-blue-50 text-blue-600 text-xs font-medium px-2 py-0.5 rounded-full hover:bg-blue-100 cursor-pointer">
-                        {topic}
-                      </span>
-                    ))}
-                  </div>
-                )}
-                <div className="flex items-center gap-4 text-xs text-gray-500">
-                  {repo.language && (
-                    <span className="flex items-center gap-1">
-                      <span className="w-3 h-3 rounded-full" style={{ backgroundColor: repo.languageColor }} />
-                      {repo.language}
-                    </span>
-                  )}
-                  <span className="flex items-center gap-1">
-                    <Star size={12} /> {repo.stars}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <GitFork size={12} /> {repo.forks}
-                  </span>
-                  <span>Updated {repo.updatedAt}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Show more */}
-          <div className="text-center mt-6">
-            <Link to={`/${user.username}`} className="text-sm text-blue-600 hover:underline flex items-center justify-center gap-1">
-              View all repositories <ArrowRight size={14} />
-            </Link>
           </div>
         </div>
       </div>
+
+      {/* Возможности */}
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <h2 className="text-2xl font-bold text-white text-center mb-12">
+          Почему выбирают <span className="text-red-500">нас</span>
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-6 hover:border-red-900/50 transition-colors">
+            <Code2 size={32} className="text-red-500 mb-4" />
+            <h3 className="text-lg font-semibold text-white mb-2">Хостинг кода</h3>
+            <p className="text-neutral-400 text-sm">
+              Безопасное хранение вашего кода с неограниченным количеством публичных и приватных репозиториев.
+            </p>
+          </div>
+          <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-6 hover:border-red-900/50 transition-colors">
+            <Users size={32} className="text-red-500 mb-4" />
+            <h3 className="text-lg font-semibold text-white mb-2">Совместная работа</h3>
+            <p className="text-neutral-400 text-sm">
+              Пул-реквесты, ревью кода, задачи и обсуждения — всё для эффективной командной разработки.
+            </p>
+          </div>
+          <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-6 hover:border-red-900/50 transition-colors">
+            <Shield size={32} className="text-red-500 mb-4" />
+            <h3 className="text-lg font-semibold text-white mb-2">Безопасность</h3>
+            <p className="text-neutral-400 text-sm">
+              Автоматическое сканирование уязвимостей, защита секретов и контроль доступа на всех уровнях.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Пустое состояние */}
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-8 sm:p-12 text-center">
+          <div className="w-16 h-16 bg-red-950/30 rounded-full flex items-center justify-center mx-auto mb-6">
+            <BookOpen size={28} className="text-red-500" />
+          </div>
+          <h3 className="text-xl font-semibold text-white mb-3">
+            У вас пока нет репозиториев
+          </h3>
+          <p className="text-neutral-400 mb-6 max-w-md mx-auto">
+            Создайте свой первый репозиторий и начните работу над проектом.
+            Это займёт всего минуту.
+          </p>
+          <button className="bg-red-600 hover:bg-red-700 text-white font-medium px-6 py-2.5 rounded-md transition-colors">
+            Создать репозиторий
+          </button>
+        </div>
+      </div>
+
+      {/* Популярные репозитории */}
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+          <TrendingUp size={20} className="text-red-500" />
+          Популярные репозитории
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            { name: 'torvalds/linux', desc: 'Ядро операционной системы Linux', stars: '172k', lang: 'C', color: '#555555' },
+            { name: 'microsoft/vscode', desc: 'Визуальный редактор кода', stars: '158k', lang: 'TypeScript', color: '#3178c6' },
+            { name: 'facebook/react', desc: 'Библиотека для создания интерфейсов', stars: '223k', lang: 'JavaScript', color: '#f1e05a' },
+            { name: 'tensorflow/tensorflow', desc: 'Фреймворк машинного обучения', stars: '183k', lang: 'C++', color: '#f34b7d' },
+          ].map((repo, i) => (
+            <div key={i} className="bg-neutral-900 border border-neutral-800 rounded-lg p-4 hover:border-red-900/50 transition-colors">
+              <div className="flex items-start justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <BookOpen size={14} className="text-neutral-500" />
+                  <span className="text-sm font-semibold text-red-400 hover:underline cursor-pointer">
+                    {repo.name}
+                  </span>
+                </div>
+                <button className="flex items-center gap-1 text-xs border border-neutral-700 rounded-md px-2 py-1 text-neutral-400 hover:text-red-400 hover:border-red-700 transition-colors">
+                  <Star size={10} /> В избранное
+                </button>
+              </div>
+              <p className="text-xs text-neutral-500 mb-3">{repo.desc}</p>
+              <div className="flex items-center gap-4 text-xs text-neutral-500">
+                <span className="flex items-center gap-1">
+                  <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: repo.color }} />
+                  {repo.lang}
+                </span>
+                <span className="flex items-center gap-1">
+                  <Star size={10} /> {repo.stars}
+                </span>
+                <span className="flex items-center gap-1">
+                  <GitFork size={10} /> {Math.floor(parseInt(repo.stars) / 4)}k
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Статистика */}
+      <div className="border-t border-neutral-800">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-3xl font-bold text-red-500 mb-1">100M+</div>
+              <div className="text-sm text-neutral-400">Разработчиков</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-red-500 mb-1">420M+</div>
+              <div className="text-sm text-neutral-400">Репозиториев</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-red-500 mb-1">90%</div>
+              <div className="text-sm text-neutral-400">Компаний Fortune 100</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-red-500 mb-1">4M+</div>
+              <div className="text-sm text-neutral-400">Организаций</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Футер */}
+      <footer className="border-t border-neutral-800 bg-black">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2 text-neutral-500 text-sm">
+              <svg height="20" viewBox="0 0 16 16" width="20" fill="currentColor">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+              </svg>
+              <span>© 2026 GitHub Clone</span>
+            </div>
+            <div className="flex items-center gap-4 text-sm text-neutral-500">
+              <Link to="/" className="hover:text-red-400 transition-colors">Условия</Link>
+              <Link to="/" className="hover:text-red-400 transition-colors">Конфиденциальность</Link>
+              <Link to="/" className="hover:text-red-400 transition-colors">Безопасность</Link>
+              <Link to="/" className="hover:text-red-400 transition-colors">Статус</Link>
+              <Link to="/" className="hover:text-red-400 transition-colors">Документация</Link>
+              <Link to="/" className="hover:text-red-400 transition-colors flex items-center gap-1">
+                <Globe size={14} /> Русский
+              </Link>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
